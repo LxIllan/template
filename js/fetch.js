@@ -1,30 +1,51 @@
-const get = (url) => {
-	const token = localStorage.getItem('jwt');
-	$.ajax({
-		url : `https://slim.damsoluciones.com/${url}`,
-		type: "GET",
-		headers: {
-			"Authorization": `Bearer ${token}`
-		},
-		success: function (data) {
-			console.log(`file: fetch.js - line 10 - data`, data.data);
-			return data.data;
-		},
-		error: function (err) {
-			console.log(`ErrGet: ${err}`);
-		}
-	});
-}
+const host = 'https://slim.damsoluciones.com/';
+// const host = 'http://localhost:8080/';
 
-const getFetch = async (url) => {
+const get = async (url) => {
 	const token = localStorage.getItem('jwt');
-	const response = await fetch(`https://slim.damsoluciones.com/${url}`, {
+	return fetch(`${host}${url}`, {
 		method: 'GET',
 		headers: {
 			"Authorization": `Bearer ${token}`
 		}
-	});
-	const data = await response.json();
-	console.log(`file: fetch.js - line 10 - data`, data.data);
-	return data.data;
+	}).then((response) => response.json())
+	.catch((error) => error.json());
+}
+
+const post = async (url, body) => {
+	const token = localStorage.getItem('jwt');
+	return fetch(`${host}${url}`, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${token}`
+		},
+		body: JSON.stringify(body)
+	}).then((response) => response.json())
+	.catch((error) => error.json());
+}
+
+const put = async (url, body) => {
+	const token = localStorage.getItem('jwt');
+	return fetch(`${host}${url}`, {
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${token}`
+		},
+		body: JSON.stringify(body)
+	}).then((response) => response.json())
+	.catch((error) => error.json());
+}
+
+const deleteFetch = async (url) => {
+	const token = localStorage.getItem('jwt');
+	return fetch(`${host}${url}`, {
+		method: 'DELETE',
+		headers: {
+			"Content-Type": "application/json",
+			"Authorization": `Bearer ${token}`
+		}
+	}).then((response) => response.json())
+	.catch((error) => error.json());
 }
