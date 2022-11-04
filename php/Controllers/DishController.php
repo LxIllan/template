@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../Fetch.php';
 require_once __DIR__ . '/../Util.php';
 
-class FoodController
+class DishController
 {
 	/**
 	 * @var Fetch $fetch
@@ -23,7 +23,7 @@ class FoodController
 	 */
 	public function getAll(): array
 	{
-		return $this->fetch->get('foods')->data->foods;
+		return $this->fetch->get('dishes')->data->foods;
 	}
 
 	/**
@@ -32,6 +32,6 @@ class FoodController
 	 */
 	public function get(int $id): stdClass
 	{
-		return $this->fetch->get("foods/$id")->data->food;
+		return $this->fetch->get("dishes/$id")->data->dish;
 	}
 }

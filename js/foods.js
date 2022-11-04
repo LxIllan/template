@@ -1,170 +1,208 @@
-$(document).ready(function () {    
-	getFetch('foods').then((data) => {
-		renderFoods(data.foods);
-	});
-
-	$('#btnSupply').click(() => {
-		foodId = $('#foodId').val();
-		quantity = $('#quantity').val();
-		supply(foodId, quantity);
-	});
+$(document).ready(function () {
+	renderFoods();
 });
 
-const supply = (foodId, quantity) => {
-	console.log(`file: foods.js - line 15 - quantity`, quantity);
-	console.log(`file: foods.js - line 15 - foodId`, foodId);
+const renderFoods = async () => {
+	const foods = await get('foods');
+	let tbody = '';
+	foods.data.foods.forEach((food) => {
+		let trClass = (food.quantity <= food.quantity_notify) ? 'table-secondary' : '';
+		tbody += `<tr "class="${trClass}">
+					<td><a href="dishes.php?foodId=${food.id}">${food.name}</a></td>
+					<td>${food.quantity}</td>
+					<td><div class="btn-group">
+							<button type="button" class="btn btn-ligth
+								dropdown-toggle btn-sm"
+									data-toggle="dropdown">&nbsp;&nbsp;<i
+										class="fa fa-fw fa-cogs"></i>&nbsp;&nbsp;
+								<span class="caret"></span>
+							</button>
+							<div class="dropdown-menu">
+								<button class="dropdown-item" onclick="loadSupply(${food.id}, '${food.name}', ${food.quantity})">
+									<i class="fa fa-fw fa-cart-plus"></i>
+										Surtir
+								</button>
+								<div class="dropdown-divider"></div>
+								<button class="dropdown-item" onclick="loadAlter(${food.id}, '${food.name}', ${food.quantity})">
+									<i class="fa fa-fw fa-exclamation"></i>
+										Alterar
+								</button>
+								<div class="dropdown-divider"></div>
+								<button class="dropdown-item" onclick="loadDelete(${food.id}, '${food.name}')">
+									<i class="fa fa-fw fa-trash"></i>
+										Eliminar
+								</button>
+							</div>
+						</div>
+					</td>
+				</tr>`;
+			});
+	$('#foodsTable').html(tbody);
+};
+
+$('#addForm').submit((e) => {
+	e.preventDefault();
+	let name = $('#addName').val();
+	let category = $('#addCategory').val();
+	let quantity = $('#addQuantity').val();
+	let quantityNotify = $('#addQuantityNotify').val();
+	let cost = $('#addCost').val();
+	pieces = $('#alterPieces').val();
+	reason = $('#alterReason').val();
+	$('#addName').val('');
+	$('#addCategory').val('Please Select');
+	$('#addQuantityNotify').val('');
+	$('#addQuantity').val('');
+	$('#addCost').val('');
+	$('#addModal').modal('hide');
+	add(name, category, quantity, quantityNotify, cost);
+});
+
+const add = async (name, category, quantity, quantityNotify, cost) => {
+	let url = `foods`;
+	let data = {
+		name : name,
+		quantity: quantity,
+		quantity_notif : quantityNotify,
+		cost : cost,
+		category_id : category
+	};
+	const response = await post(url, data);
+	if (response.statusCode == 201) {
+		renderFoods();
+		Swal.fire({
+			title: 'Success!',
+			text: 'Has been added successfully!',
+			icon: 'success',
+			showConfirmButton: false,
+			timer: 1000
+		});
+	} else {
+		Swal.fire({
+			title: 'Oops...',
+			text: 'Something went wrong!',
+			icon: 'error',
+			showConfirmButton: false,
+			timer: 1500
+		});
+	}
 }
 
-const renderFoods = (foods) => {
-	let html = `<!-- card -->
-	<div>
-		<div>
-			<div class="text-center">
-				<a href="#add" data-toggle="modal">
-					<button type='button' class='btn btn-primary btn-sm'><span class='fa fa-fw fa-plus' aria-hidden='true'></span></button>
-				</a>
-			</div>
-			<br>
-			<div class="table-responsive">
-				<table class="table table-hover table-condensed">
-					<thead>
-					<tr class="bg-primary">
-						<th>Nombre</th>
-						<th>Cantidad</th>
-						<th></th>
-					</tr>
-					</thead>
-					<tbody>`;
-	foods.forEach(food => {
-		html += `<tr>
-					<tr <?php if ($food->quantity <= $food->quantity_notif) { echo "class=\"table-secondary\"";} ?>>
-						<td><a href="frm_platillos.php?id_alimento=${food.id}">${food.name}</a></td>
-						<td>${food.quantity}</td>
-						<td><div class="btn-group">
-								<button type="button" class="btn btn-ligth
-									dropdown-toggle btn-sm"
-										data-toggle="dropdown">&nbsp;&nbsp;<i
-											class="fa fa-fw fa-cogs"></i>&nbsp;&nbsp;
-									<span class="caret"></span>
-								</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" 
-										href="#supply${food.id}" data-toggle="modal">
-											<i class="fa fa-fw fa-cart-plus"></i>
-											Surtir
-										</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item"
-										href="#alter${food.id}" data-toggle="modal">
-										<i class="fa fa-fw fa-exclamation"></i>
-											Alterar
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item"
-										href="#delete${food.id}" data-toggle="modal">
-										<i class="fa fa-fw fa-trash"></i>
-											Eliminar
-									</a>
-								</div>
-							</div>
-						</td>
-					</tr>
-						<!-- Supply Item Modal -->
-						<div id="supply${food.id}" class="modal fade" role="dialog">
-							<form method="post" class="form-horizontal" role="form">
-								<div class="modal-dialog modal-md">
-									<!-- Modal content-->
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">Surtir Alimento</h4>
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-										</div>
-										<div class="modal-body">
-											<input type="hidden" id="foodId" name="food_id" value="${food.id}">
-											<div class="form-row">
-												<div class="form-group col-md-6">
-													<label class="control-label">Nombre:</label><br>
-													<input type="text" class="form-control" name="name" value="${food.name}" readonly>
-												</div>                                                    
-													<div class="form-group col-md-6">
-														<label class="control-label">Cantidad:</label><br>
-														<input type="number" class="form-control" id="quantity" name="quantity" value="${food.quantity}" readonly>                                                       
-													</div>
-												
-											</div>
-											<div class="form-row">
-												<div class="col-12">
-													<input type="text" class="form-control" name="pieces" placeholder="12,13,15" pattern="[0-9.,]+" required>
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button class="btn btn-primary" id="btnSupply" name="supply"><span class="fa fa-fw fa-check"></span></button>
-											<button type="button" class="btn btn-light" data-dismiss="modal"><span class="fa fa-fw fa-remove"></span></button>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-						<!-- /Supply Item Modal -->
-
-						<!--Alter Item Modal -->
-						<div id="alter${food.id}" class="modal fade" role="dialog">
-							<form method="post" class="form-horizontal" role="form">
-								<div class="modal-dialog modal-md">
-									<!-- Modal content-->
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">Alterar Alimento</h4>
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-										</div>
-										<div class="modal-body">
-											<input type="hidden" name="food_id" value="${food.id}">
-											<div class="alert alert-ligth alert-dismissible text-center">
-												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="form-row">
-												<div class="form-group col-md-6">
-													<label class="control-label">Nombre:</label><br>
-													<input type="text" class="form-control" name="name" value="${food.name}" readonly>
-												</div>                                                    
-													<div class="form-group col-md-6">
-														<label class="control-label">Cantidad:</label><br>
-														<input type="number" class="form-control" name="quantity" value="${food.quantity}" readonly>
-													</div>                                                    
-											</div>                                            
-											<div class="form-row">
-												<div class="form-group col-md-4">
-													<label class="control-label">Cantidad:</label><br>
-													<input type="number" class="form-control" name="pieces" value="0", step=".01" required>
-												</div>
-												<div class="form-group col-md-8">
-													<label class="control-label">Justificacion:</label><br>
-													<input type="text" name="reason" class="form-control" required>
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="submit" class="btn btn-primary" name="alter"><span class="fa fa-fw fa-check"></span></button>
-											<button type="button" class="btn btn-light" data-dismiss="modal"><span class="fa fa-fw fa-remove"></span></button>
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-						<!-- /Alter Item Modal -->
-
-				<?php
-				} // end foreach`;
-			});
-	html += `</tbody>
-			</table>
-		</div>
-	</div>
-	</div>
-	<!-- /card -->
-	</br>`;
-	$('#foodsCardJs').html(html);		
+const loadAlter = (id, name, quantity) => {
+	$('#alterFoodId').val(id);
+	$('#alterName').val(name);
+	$('#alterQuantity').val(quantity);
+	$('#alterModal').modal('show');
 };
+
+$('#alterForm').submit((e) => {	
+	e.preventDefault();
+	let foodId = $('#alterFoodId').val();
+	let pieces = $('#alterPieces').val();
+	let reason = $('#alterReason').val();
+	$('#alterReason').val('');
+	$('#alterPieces').val('');
+	$('#alterModal').modal('hide');
+	alter(foodId, pieces, reason);
+});
+
+const alter = async (foodId, pieces, reason) => {
+	let url = `foods/${foodId}/alter`;
+	let data = {
+		quantity : pieces, 
+		reason : reason
+	};
+	const response = await put(url, data);
+	if (response.statusCode == 200) {
+		renderFoods();
+		Swal.fire({
+			title: 'Success!',
+			text: 'Has been altered successfully!',
+			icon: 'success',
+			showConfirmButton: false,
+			timer: 1000
+		});
+	} else {
+		Swal.fire({
+			title: 'Oops...',
+			text: 'Something went wrong!',
+			icon: 'error',
+			showConfirmButton: false,
+			timer: 1500
+		});
+	}
+}
+
+const loadSupply = (id, name, quantity) => {
+	$('#supplyFoodId').val(id);
+	$('#supplyName').val(name);
+	$('#supplyQuantity').val(quantity);
+	$('#supplyModal').modal('show');
+};
+
+$('#supplyForm').submit((e) => {
+	e.preventDefault();
+	let foodId = $('#supplyFoodId').val();
+	let pieces = $('#supplyPieces').val();
+	$('#supplyPieces').val('');
+	$('#supplyModal').modal('hide');
+	supply(foodId, pieces);
+});
+
+const supply = async (foodId, pieces) => {
+	let url = `foods/${foodId}/supply`;
+	let data = {quantity : pieces};
+	const response = await put(url, data);
+	if (response.statusCode == 200) {
+		renderFoods();
+		Swal.fire({
+			title: 'Success!',
+			text: 'Has been supplied successfully!',
+			icon: 'success',
+			showConfirmButton: false,
+			timer: 1000
+		});
+	} else {
+		Swal.fire({
+			title: 'Oops...',
+			text: 'Something went wrong!',
+			icon: 'error',
+			showConfirmButton: false,
+			timer: 1500
+		});
+	}
+}
+
+const loadDelete = async (foodId, name) => {
+	Swal.fire({
+		title: `Do you want to delete ${name}?`,
+		showDenyButton: true,
+		confirmButtonText: 'Yes',
+		confirmButtonColor: '#f8f9fa',
+		denyButtonText: 'No',
+		denyButtonColor: '#007bff'
+	  }).then(async (result) => {
+		if (result.isConfirmed) {
+			let url = `foods/${foodId}`;
+			const response = await deleteFetch(url);
+			if (response.statusCode == 200) {
+				renderFoods();
+				Swal.fire({
+					title: 'Success!',
+					text: 'Has been deleted successfully!',
+					icon: 'success',
+					showConfirmButton: false,
+					timer: 1000
+				});
+			} else {
+				Swal.fire({
+					title: 'Oops...',
+					text: 'Something went wrong!',
+					icon: 'error',
+					showConfirmButton: false,
+					timer: 1500
+				});
+			}
+		}
+	});
+}
