@@ -1,19 +1,13 @@
-<?php
+<?php    
+	
+	require_once 'template.php';    
 
-    session_start();
-
-    if (!isset($_SESSION['user'])) {
-        header('Location: login.php');
-    }        
-    
-    require_once 'template.php';    
-
-    head('Blank');
-    body(['Blank']);        
+	head('Blank');
+	body(['Blank']);        
 ?>
 
-    
+
 
 <?php 
-    footer();
+	footer();
 ?>

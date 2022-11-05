@@ -20,6 +20,10 @@ const deleteCookie = (name) => {
 
 if (!localStorage.getItem('jwt')) {
 	let jwt = getCookie('jwt');
-	localStorage.setItem('jwt', jwt);
-	deleteCookie('jwt');
+	if (jwt) {
+		localStorage.setItem('jwt', jwt);
+		deleteCookie('jwt');
+	} else {
+		window.location.href = 'login.php';
+	}
 }

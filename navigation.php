@@ -108,7 +108,7 @@
 							</a>
 						</li>
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos surtidos">
-							<a class="nav-link" href="frm_historial_alimentos.php">
+							<a class="nav-link" href="history_foods.php">
 								<i class="fa fa-user fa-list-alt"></i>
 								Alimentos surtidos
 							</a>
@@ -143,10 +143,10 @@
 								<span class="nav-link-text">Paquetes</span>
 							</a>
 						</li>
-						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Cajeros">
-							<a class="nav-link" href="frm_cajeros.php">
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
+							<a class="nav-link" href="users.php">
 								<i class="fa fa-fw fa-users"></i>
-								<span class="nav-link-text">Cajeros</span>
+								<span class="nav-link-text">Usuarios</span>
 							</a>
 						</li>                        
 						<li>
