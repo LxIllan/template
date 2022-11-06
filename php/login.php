@@ -13,11 +13,11 @@ $data = [
 ];
 
 $response = $fetch->post('login', $data);
-
 if ($response->statusCode == 200) {
 	$fetch->setToken($response->data->jwt);
 	$_SESSION['jwt'] = $response->data->jwt;
-	$user = $fetch->get('profile');
+	$userId = Util::decode_jwt($response->data->jwt)->user_id;
+	$user = $fetch->get("users/$userId");
 	$branch = $fetch->get("branches/{$user->data->user->branch_id}");
 	unset($fetch);
 	$_SESSION['user'] = [
