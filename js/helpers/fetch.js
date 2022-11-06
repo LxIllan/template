@@ -25,6 +25,18 @@ const post = async (url, body) => {
 	.catch((error) => error.json());
 }
 
+const postWithFiles = async (url, body) => {
+	const token = localStorage.getItem('jwt');	
+	return fetch(`${host}${url}`, {
+		method: 'POST',
+		headers: {
+			"Authorization": `Bearer ${token}`
+		},
+		body: body,
+	}).then((response) => response.json())
+	.catch((error) => error.json());
+}
+
 const put = async (url, body) => {
 	const token = localStorage.getItem('jwt');
 	return fetch(`${host}${url}`, {
