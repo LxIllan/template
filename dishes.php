@@ -194,5 +194,5 @@
 <!--/Edit Item Modal -->
 
 <?php 
-	footer(['js/dishes.js']);
+	footer(['js/dishes/dishes.js']);
 ?>

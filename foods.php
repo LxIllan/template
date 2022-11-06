@@ -194,5 +194,5 @@
 <!-- /Supply Item Modal -->
 
 <?php 
-	footer(['js/foods.js']);
+	footer(['js/foods/foods.js']);
 ?>

@@ -122,8 +122,8 @@ function footer(array $sources = []) {
 					<script src="js/sb-admin-datatables.min.js"></script>
 					<script src="js/sb-admin-charts.min.js"></script>
 					<script src="js/sweetalert2@11.js"></script>
-					<script src="js/fetch.js"></script>
-					<script src="js/logout.js"></script>
+					<script src="js/helpers/fetch.js"></script>
+					<script src="js/auth/logout.js"></script>
 					$source
 				</div>
 				<!-- /.content-wrapper-->

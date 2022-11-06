@@ -47,8 +47,6 @@ $('#addForm').submit((e) => {
 	let quantity = $('#addQuantity').val();
 	let quantityNotify = $('#addQuantityNotify').val();
 	let cost = $('#addCost').val();
-	pieces = $('#alterPieces').val();
-	reason = $('#alterReason').val();
 	$('#addName').val('');
 	$('#addCategory').val('Please Select');
 	$('#addQuantityNotify').val('');
