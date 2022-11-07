@@ -2,7 +2,7 @@
 
 class Util 
 {
-	public const API_URL = 'https://slim.damsoluciones.com/';
+	public const API_URL = 'https://slim.syss.tech/';
 	public const FOOTER = 'Copyright © Template 2022';
 	public const APP_NAME = 'Template';
 
