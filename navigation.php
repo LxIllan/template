@@ -149,6 +149,12 @@
 								<span class="nav-link-text">Usuarios</span>
 							</a>
 						</li>
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sucursal">
+							<a class="nav-link" href="branch.php">
+								<i class="fa fa-fw fa-cubes"></i>
+								<span class="nav-link-text">Sucursal</span>
+							</a>
+						</li>
 						<li>
 							<a class="nav-link" href="frm_resumen.php">
 								<i class="fa fa-fw fa-list-alt"></i>
