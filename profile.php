@@ -5,99 +5,85 @@
 ?>
 
 
-<?php
+<?php	
 	require_once 'php/Controllers/UserController.php';
+
+	$userId = (isset($_GET['id'])) ? $_GET['id'] : $_SESSION['user']['id'];
 	$userController = new UserController($_SESSION['jwt']);
-	$user = $userController->get($_SESSION['user']['id']);
+	$user = $userController->get($userId);
 ?>
 
 <!-- row -->
 <div class="row">
-	<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-		<form class="" action="" method="post" enctype="multipart/form-data">
+	<div class="col-12">
+		<form id="editUserForm">
 			<div class="text-center">
-				<img class="rounded-circle" height="200" width="200"
-						src="<?= $user->photo_path; ?>"/>
+				<img class="rounded-circle" id="image" height="200" width="200" src="<?= $user->photo_path; ?>"/>
 				<br>
-				<br>
-				<output id="list"></output>
-				<input type="file" accept=".jpg" class="btn-light" id="files" name="files">
+				<br>				
+				<input type="file" accept=".jpg" class="btn-light" id="uploadImage">
 				<br>
 			</div>
 			<br>
+			<input type="hidden" id="userId" value="<?= $user->id; ?>">
 			<div class="form-row">
-				<div class="col-md-4 mb-3">
-					<label class="control-label" for="txtNombre">Nombre:</label>
-					<input type="text" class="form-control" name="nombre" id="txtNombre"
-						value="<?= $user->name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*" readonly>
+				<div class="form-group col-md-4">
+					<label class="control-label" for="name">Nombre</label>
+					<input type="text" class="form-control" id="name" <?= (!$user->root) ? 'readonly' : ''; ?>
+						value="<?= $user->name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
 				</div>
-				<div class="col-md-4 mb-3">
-					<label class="control-label" for="txtApellido1">Primer apellido:</label>
-					<input type="text" class="form-control" name="apellido1" id="txtApellido1"
-						value="<?= $user->last_name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*" readonly>
-				</div>
-				<div class="col-md-4 mb-3">
-					<label class="control-label" for="txtApellido2">Segundo apellido:</label>
-					<input type="text" class="form-control" name="apellido2" id="txtApellido2"
+				<div class="form-group col-md-4">
+					<label class="control-label" for="lastName">Apellido</label>
+					<input type="text" class="form-control" id="lastName" <?= (!$user->root) ? 'readonly' : ''; ?>
 						value="<?= $user->last_name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
 				</div>
-			</div>
-			<div class="form-row">
-				<div class="col-md-4 mb-3">
-					<label class="control-label" for="txtTelefono">Teléfono:</label>
-					<input type="text" class="form-control" name="telefono" id="txtTelefono"
-						value="<?= $user->phone_number; ?>">
-				</div>
-				<div class="col-md-4 mb-3">
-					<label class="control-label" for="txtCorreo">Correo electrónico:</label>
-					<input type="text" class="form-control" name="correo" id="txtCorreo"
+				<div class="form-group col-md-4">
+					<label class="control-label" for="email">Correo electrónico</label>
+					<input type="email" class="form-control" id="email" <?= (!$user->root) ? 'readonly' : ''; ?>
 						value="<?= $user->email; ?>">
 				</div>
-				<div class="col-md-4 mb-3">
-					<label class="control-label" for="txtDomicilio">Domicilio:</label>
-					<input type="text" class="form-control" name="domicilio" id="txtDomicilio"
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label class="control-label" for="address">Domicilio</label>
+					<input type="text" class="form-control" id="address" <?= (!$user->root) ? 'readonly' : ''; ?>
 						value="<?= $user->address; ?>">
 				</div>
-			</div>
-			<?php
-				if (isset($_GET['error'])) {
-					if ($_GET['error'] == 1) {
-						$error = 'Las contraseñas no coinciden.';
-					} elseif ($_GET['error'] == 2) {
-						// Claves menores de 8 chars
-						$error = 'Tiene que ingresar una contraseña de al menos 4 caracteres';
-					}?>
-					<div class="alert alert-danger alert-dismissible text-center">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span> </button>
-						<strong>¡Error!</strong> <?= $error; ?>
-					</div>
-					<?php
-				}
-			?>
-			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label class="control-label">Nueva Contraseña:</label>
-					<input type="password" name="clave" class="form-control"
-						placeholder="Contraseña">        
+				<div class="form-group col-md-4">
+					<label class="control-label" for="phone">Teléfono</label>
+					<input type="text" class="form-control" id="phone" <?= (!$user->root) ? 'readonly' : ''; ?>
+						value="<?= $user->phone_number; ?>">
 				</div>
-				<div class="form-group col-md-6">
-					<label class="control-label">Confirmar contraseña:</label>
-					<input type="password" name="clave1" class="form-control"
-						placeholder="Contraseña">  
+				<div class="form-group col-md-4">
+					<label class="control-label" for="root">Administrador</label><br>
+					<input type="checkbox" id="root" <?= ($user->root) ? 'checked' : ''; ?> class="form-control" hidden>
+					<input type="text" class="form-control" value="<?= ($user->root) ? 'Sí' : 'No'; ?>" readonly>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<!--  -->
+				</div>
+				<div class="form-group col-md-3">
+					<label class="control-label" for="password">Nueva Contraseña:</label>
+					<input type="password" id="password" class="form-control" placeholder="Contraseña">        
+				</div>
+				<div class="form-group col-md-3">
+					<label class="control-label" for="confirmPassword">Confirmar contraseña:</label>
+					<input type="password" id="confirmPassword" class="form-control" placeholder="Contraseña">  
+				</div>
+				<div class="form-group col-md-3">
+					<!--  -->
 				</div>
 			</div>
 			<div class="text-center">
-				<input type="submit" name="aceptar" value="Guardar Cambios" class="btn btn-primary">
-
-				<input type="submit" name="Salir" value="Cancelar" class="btn btn-light">
+				<button type="submit" class="btn btn-primary" id="btnEditProfile">Guardar</button>
 			</div>
 		</form>
 	</div>
 </div>
 <!-- /.row -->
 
-
 <?php 
-	footer(['js/foods.js']);
+	footer(['js/users/user.js']);
 ?>
