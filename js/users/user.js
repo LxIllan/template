@@ -37,7 +37,6 @@ $('#editUserForm').submit((e) => {
 	if (image) {
 		formData.append('image', image.files[0]);
 	}
-	formData.append('image', image);
 
 	editUser(userId, formData);
 });
@@ -105,7 +104,6 @@ $('#uploadImage').change((e) => {
 	e.preventDefault();
 	let image = $('#uploadImage')[0].files[0];
 	
-	//Solo admitimos imágenes.
 	if (!image.type.match('image.*')) {
 		Swal.fire({
 			title: 'Oops...',
