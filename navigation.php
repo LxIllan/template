@@ -83,7 +83,7 @@
 							</a>
 						</li>
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Productos">
-							<a class="nav-link" href="frm_productos.php">
+							<a class="nav-link" href="products.php">
 								<i class="fa fa-user fa-cubes"></i>
 								Productos
 							</a>
@@ -148,7 +148,7 @@
 								<i class="fa fa-fw fa-users"></i>
 								<span class="nav-link-text">Usuarios</span>
 							</a>
-						</li>                        
+						</li>
 						<li>
 							<a class="nav-link" href="frm_resumen.php">
 								<i class="fa fa-fw fa-list-alt"></i>
