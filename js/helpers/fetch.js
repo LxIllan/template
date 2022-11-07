@@ -1,4 +1,4 @@
-const host = 'https://slim.damsoluciones.com/';
+const host = 'https://slim.syss.tech/';
 // const host = 'http://localhost:8080/';
 
 const get = async (url) => {
