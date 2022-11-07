@@ -6,7 +6,7 @@
 	$food = $foodController->get($foodId);
 
     head('Alimentos');
-    body(['foods.php' => 'Alimentos', $food->name]);	
+    body(['foods.php' => 'Alimentos', $food->name]);
 ?>
 
 
@@ -20,36 +20,36 @@
 			<input type="hidden" id="foodId" value="<?= $food->id; ?>">
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<label class="control-label">Nombre:</label>
+					<label class="control-label" for="foodName">Nombre:</label>
 					<input type="text" class="form-control" id="foodName" value="<?= $food->name; ?>" required>
 				</div>
 				<div class="form-group col-md-4">
-					<label class="control-label">Cantidad:</label>
+					<label class="control-label" for="foodQuantity">Cantidad:</label>
 					<input type="number" class="form-control" id="foodQuantity" value="<?= $food->quantity; ?>" readonly>
 				</div>
 				<div class="form-group col-md-4">
-					<label class="control-label">Notificar si hay:</label>
+					<label class="control-label" for="foodQuantityNotify">Notificar si hay:</label>
 					<input type="number" class="form-control" id="foodQuantityNotify" value="<?= $food->quantity_notif; ?>">
 				</div>				
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<label class="control-label">Costo:</label>
+					<label class="control-label" for="foodCost">Costo:</label>
 					<input type="number" class="form-control" id="foodCost" value="<?= $food->cost; ?>" value="0" min="0" step="any">
 				</div>
 				<div class="form-group col-md-4">
-					<label class="control-label">Piezas por paquete:</label>
+					<label class="control-label" for="foodPiecesPerPackage">Piezas por paquete:</label>
 					<input type="number" class="form-control" id="foodPiecesPerPackage" value="<?= $food->pieces_per_package; ?>">
 				</div>
 				<div class="form-group col-md-4">
 					<div class="text-center">
-						<label class="control-label">Ver en inicio</label>
-						<input type="checkbox" id="foodShowInIndex" class="form-control" <?= ($food->show_in_index) ? 'checked' : ''; ?>>
+						<label class="control-label" for="foodShowInIndex">Ver en inicio</label>
+						<input type="checkbox" class="form-control" id="foodShowInIndex" <?= ($food->show_in_index) ? 'checked' : ''; ?>>
 					</div>
 				</div>
 			</div>
 			<div class="text-center">
-				<button type="submit" class="btn btn-primary" id="editFood"><span class="fa fa-fw fa-check"></span></button>
+				<button type="submit" class="btn btn-primary" id="btnEditFood"><span class="fa fa-fw fa-check"></span></button>
 			</div>
 		</form>
 	</div>

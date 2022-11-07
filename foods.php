@@ -57,11 +57,11 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label class="control-label">Nombre:</label>
+							<label class="control-label" for="addName">Nombre:</label>
 							<input type="text" class="form-control" id="addName" placeholder="Nombre" required>
 						</div>
 						<div class="form-group col-md-4">
-							<label class="control-label">Categoría:</label>
+							<label class="control-label" for="addCategory">Categoría:</label>
 							<select id="addCategory" class="form-control custom-select">
 								<?php
 								foreach ($categories as $category) {
@@ -74,17 +74,17 @@
 							</select>
 						</div>
 						<div class="form-group col-md-4">
-							<label class="control-label">Notificar si hay:</label>
+							<label class="control-label" for="addQuantityNotify">Notificar si hay:</label>
 							<input type="number" class="form-control" id="addQuantityNotify" value="5" min="0">
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label class="control-label">Costo:</label>
+							<label class="control-label" for="addCost">Costo:</label>
 							<input type="number" class="form-control" id="addCost" value="0" min="0">
 						</div>
 						<div class="form-group col-md-4">
-							<label class="control-label">Cantidad:</label>
+							<label class="control-label" for="addQuantity">Cantidad:</label>
 							<input type="number" class="form-control" id="addQuantity" value="0" min="0" step=".01" required>
 						</div>
 						<div class="form-group col-md-4">
@@ -123,21 +123,21 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label class="control-label">Nombre:</label>
+							<label class="control-label" for="alterName">Nombre:</label>
 							<input type="text" class="form-control" id="alterName" readonly>
 						</div>
 							<div class="form-group col-md-6">
-								<label class="control-label">Cantidad:</label>
+								<label class="control-label" for="alterQuantity">Cantidad:</label>
 								<input type="number" class="form-control" id="alterQuantity" readonly>
 							</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
-							<label class="control-label">Piezas:</label>
+							<label class="control-label" for="alterPieces">Piezas:</label>
 							<input type="number" class="form-control" id="alterPieces" value="0", step=".01" required>
 						</div>
 						<div class="form-group col-md-8">
-							<label class="control-label">Justificacion:</label>
+							<label class="control-label" for="alterReason">Justificacion:</label>
 							<input type="text" id="alterReason" class="form-control" required>
 						</div>
 					</div>
@@ -167,17 +167,17 @@
 					<input type="hidden" id="supplyFoodId" value="">
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label class="control-label">Nombre:</label>
+							<label class="control-label" for="supplyName">Nombre:</label>
 							<input type="text" class="form-control" id="supplyName" readonly>
 						</div>
 							<div class="form-group col-md-6">
-								<label class="control-label">Cantidad:</label>
+								<label class="control-label" for="supplyQuantity">Cantidad:</label>
 								<input type="number" class="form-control" id="supplyQuantity" readonly>
 							</div>						
 						</div>
 						<div class="form-row">
 							<div class="form-group col-12">
-								<label class="control-label">Piezas:</label>
+								<label class="control-label" for="supplyPieces">Piezas:</label>
 								<input type="number" class="form-control" id="supplyPieces" value="0", step=".01" required>
 							</div>
 						</div>
