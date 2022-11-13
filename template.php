@@ -8,7 +8,12 @@ if (!isset($_SESSION['user'])) {
 
 require_once 'php/Util.php';
 
-function head($title = Util::APP_NAME) {
+/**
+ * @param string $title
+ * @return void
+ */
+function head(string $title = Util::APP_NAME): void
+{
 	echo <<<HTML
 	<!DOCTYPE html>
 		<html lang="en">
@@ -30,11 +35,16 @@ function head($title = Util::APP_NAME) {
 	HTML;
 }
 
-function createBreadcrumbs(array $breadcrumbs = []): string  {
+/**
+ * @param array $breadcrumbs
+ * @return string
+ */
+function createBreadcrumbs(array $breadcrumbs = []): string
+{
 	$i = 0;
 	$len = count($breadcrumbs);
 	$breadcrumb = '';
-	foreach ($breadcrumbs as $key => $value) {                                            
+	foreach ($breadcrumbs as $key => $value) {
 		$breadcrumb .= '<li class="breadcrumb-item"><a href="' . $key . '">' . $value . '</a></li>';
 		if ($i == $len - 2) {
 			break;
@@ -44,8 +54,13 @@ function createBreadcrumbs(array $breadcrumbs = []): string  {
 	return $breadcrumb;
 }
 
-function body(array $breadcrumbs = []) {
-	$breadcrumbs = ['index.php' => Util::APP_NAME] + $breadcrumbs;        
+/**
+ * @param array $breadcrumbs
+ * @return void
+ */
+function body(array $breadcrumbs = []): void
+{
+	$breadcrumbs = ['index.php' => Util::APP_NAME] + $breadcrumbs;
 	$breadcrumb = createBreadcrumbs($breadcrumbs);
 	require_once 'navigation.php';
 	echo <<<HTML
@@ -53,7 +68,7 @@ function body(array $breadcrumbs = []) {
 
 				<!-- content-wrapper-->
 				<div class="content-wrapper">
-				
+
 					<!-- container-fluid-->
 					<div class="container-fluid">
 
@@ -76,16 +91,21 @@ function body(array $breadcrumbs = []) {
 	HTML;
 }
 
-function footer(array $sources = []) {
+/**
+ * @param array $sources
+ * @return void
+ */
+function footer(array $sources = []): void
+{
 	$footer = Util::FOOTER;
 	if (count($sources) > 0) {
-        $source = "";
-        foreach ($sources as $value) {
-            $source .= "<script src=\"$value\"></script>";
-        }
-    } else {
-        $source = "";
-    }
+		$source = "";
+		foreach ($sources as $value) {
+			$source .= "<script src=\"$value\"></script>";
+		}
+	} else {
+		$source = "";
+	}
 	echo <<<HTML
 					</div>
 					<!-- /.container-fluid-->
@@ -100,18 +120,16 @@ function footer(array $sources = []) {
 						</div>
 					</footer>
 					<!-- /.footer -->
-		
+
 					<!-- Scroll to Top Button-->
 					<a class="scroll-to-top rounded" href="#page-top">
 						<i class="fa fa-angle-up"></i>
 					</a>
 					<!-- /.Scroll to Top Button-->
-	
+
 					<!-- Bootstrap core JavaScript-->
 					<script src="vendor/jquery/jquery.min.js"></script>
 					<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-					<!-- Core plugin JavaScript-->
-					<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 					<!-- Page level plugin JavaScript-->
 					<script src="vendor/chart.js/Chart.min.js"></script>
 					<script src="vendor/datatables/jquery.dataTables.js"></script>
