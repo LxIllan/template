@@ -3,13 +3,13 @@ $(document).ready(function () {
 });
 
 const renderFoods = async () => {
-	const foods = await get('foods');
-	let tbody = '';
+	const foods = await get("foods");
+	let tbody = "";
 	foods.data.foods.forEach((food) => {
-		let trClass = (food.quantity <= food.quantity_notify) ? 'table-secondary' : '';
+		let trClass = food.qty <= food.qty_notify ? "table-secondary" : "";
 		tbody += `<tr "class="${trClass}">
 					<td><a href="dishes.php?foodId=${food.id}">${food.name}</a></td>
-					<td>${food.quantity}</td>
+					<td>${food.qty}</td>
 					<td><div class="btn-group">
 							<button type="button" class="btn btn-ligth
 								dropdown-toggle btn-sm"
@@ -18,12 +18,12 @@ const renderFoods = async () => {
 								<span class="caret"></span>
 							</button>
 							<div class="dropdown-menu">
-								<button class="dropdown-item" onclick="loadSupply(${food.id}, '${food.name}', ${food.quantity})">
+								<button class="dropdown-item" onclick="loadSupply(${food.id}, '${food.name}', ${food.qty})">
 									<i class="fa fa-fw fa-cart-plus"></i>
 										Surtir
 								</button>
 								<div class="dropdown-divider"></div>
-								<button class="dropdown-item" onclick="loadAlter(${food.id}, '${food.name}', ${food.quantity})">
+								<button class="dropdown-item" onclick="loadAlter(${food.id}, '${food.name}', ${food.qty})">
 									<i class="fa fa-fw fa-exclamation"></i>
 										Alterar
 								</button>
@@ -36,171 +36,171 @@ const renderFoods = async () => {
 						</div>
 					</td>
 				</tr>`;
-			});
-	$('#foodsTable').html(tbody);
+	});
+	$("#foodsTable").html(tbody);
 };
 
-$('#addForm').submit((e) => {
+$("#addForm").submit((e) => {
 	e.preventDefault();
-	let name = $('#addName').val();
-	let category = $('#addCategory').val();
-	let quantity = $('#addQuantity').val();
-	let quantityNotify = $('#addQuantityNotify').val();
-	let cost = $('#addCost').val();
-	$('#addName').val('');
-	$('#addCategory').val('Please Select');
-	$('#addQuantityNotify').val('');
-	$('#addQuantity').val('');
-	$('#addCost').val('');
-	$('#addModal').modal('hide');
-	add(name, category, quantity, quantityNotify, cost);
+	let name = $("#addName").val();
+	let category = $("#addCategory").val();
+	let qty = $("#addQty").val();
+	let qtyNotify = $("#addQtyNotify").val();
+	let cost = $("#addCost").val();
+	$("#addName").val("");
+	$("#addCategory").val("Please Select");
+	$("#addQtyNotify").val("");
+	$("#addQty").val("");
+	$("#addCost").val("");
+	$("#addModal").modal("hide");
+	add(name, category, qty, qtyNotify, cost);
 });
 
-const add = async (name, category, quantity, quantityNotify, cost) => {
+const add = async (name, category, qty, qtyNotify, cost) => {
 	let url = `foods`;
 	let data = {
-		name : name,
-		quantity: quantity,
-		quantity_notif : quantityNotify,
-		cost : cost,
-		category_id : category
+		name: name,
+		qty: qty,
+		qty_notify: qtyNotify,
+		cost: cost,
+		category_id: category,
 	};
 	const response = await post(url, data);
 	if (response.statusCode == 201) {
 		renderFoods();
 		Swal.fire({
-			title: 'Success!',
-			text: 'Has been added successfully!',
-			icon: 'success',
+			title: "Success!",
+			text: "Has been added successfully!",
+			icon: "success",
 			showConfirmButton: false,
-			timer: 1000
+			timer: 1000,
 		});
 	} else {
 		Swal.fire({
-			title: 'Oops...',
-			text: 'Something went wrong!',
-			icon: 'error',
+			title: "Oops...",
+			text: "Something went wrong!",
+			icon: "error",
 			showConfirmButton: false,
-			timer: 1500
+			timer: 1500,
 		});
 	}
-}
-
-const loadAlter = (id, name, quantity) => {
-	$('#alterFoodId').val(id);
-	$('#alterName').val(name);
-	$('#alterQuantity').val(quantity);
-	$('#alterModal').modal('show');
 };
 
-$('#alterForm').submit((e) => {	
+const loadAlter = (id, name, qty) => {
+	$("#alterFoodId").val(id);
+	$("#alterName").val(name);
+	$("#alterQty").val(qty);
+	$("#alterModal").modal("show");
+};
+
+$("#alterForm").submit((e) => {
 	e.preventDefault();
-	let foodId = $('#alterFoodId').val();
-	let pieces = $('#alterPieces').val();
-	let reason = $('#alterReason').val();
-	$('#alterReason').val('');
-	$('#alterPieces').val('');
-	$('#alterModal').modal('hide');
+	let foodId = $("#alterFoodId").val();
+	let pieces = $("#alterPieces").val();
+	let reason = $("#alterReason").val();
+	$("#alterReason").val("");
+	$("#alterPieces").val(0);
+	$("#alterModal").modal("hide");
 	alter(foodId, pieces, reason);
 });
 
 const alter = async (foodId, pieces, reason) => {
 	let url = `foods/${foodId}/alter`;
 	let data = {
-		quantity : pieces, 
-		reason : reason
+		qty: pieces,
+		reason: reason,
 	};
 	const response = await put(url, data);
 	if (response.statusCode == 200) {
 		renderFoods();
 		Swal.fire({
-			title: 'Success!',
-			text: 'Has been altered successfully!',
-			icon: 'success',
+			title: "Success!",
+			text: "Has been altered successfully!",
+			icon: "success",
 			showConfirmButton: false,
-			timer: 1000
+			timer: 1000,
 		});
 	} else {
 		Swal.fire({
-			title: 'Oops...',
-			text: 'Something went wrong!',
-			icon: 'error',
+			title: "Oops...",
+			text: "Something went wrong!",
+			icon: "error",
 			showConfirmButton: false,
-			timer: 1500
+			timer: 1500,
 		});
 	}
-}
-
-const loadSupply = (id, name, quantity) => {
-	$('#supplyFoodId').val(id);
-	$('#supplyName').val(name);
-	$('#supplyQuantity').val(quantity);
-	$('#supplyModal').modal('show');
 };
 
-$('#supplyForm').submit((e) => {
+const loadSupply = (id, name, qty) => {
+	$("#supplyFoodId").val(id);
+	$("#supplyName").val(name);
+	$("#supplyQty").val(qty);
+	$("#supplyModal").modal("show");
+};
+
+$("#supplyForm").submit((e) => {
 	e.preventDefault();
-	let foodId = $('#supplyFoodId').val();
-	let pieces = $('#supplyPieces').val();
-	$('#supplyPieces').val('');
-	$('#supplyModal').modal('hide');
+	let foodId = $("#supplyFoodId").val();
+	let pieces = $("#supplyPieces").val();
+	$("#supplyPieces").val(0);
+	$("#supplyModal").modal("hide");
 	supply(foodId, pieces);
 });
 
 const supply = async (foodId, pieces) => {
 	let url = `foods/${foodId}/supply`;
-	let data = {quantity : pieces};
+	let data = { qty: pieces };
 	const response = await put(url, data);
 	if (response.statusCode == 200) {
 		renderFoods();
 		Swal.fire({
-			title: 'Success!',
-			text: 'Has been supplied successfully!',
-			icon: 'success',
+			title: "Success!",
+			text: "Has been supplied successfully!",
+			icon: "success",
 			showConfirmButton: false,
-			timer: 1000
+			timer: 1000,
 		});
 	} else {
 		Swal.fire({
-			title: 'Oops...',
-			text: 'Something went wrong!',
-			icon: 'error',
+			title: "Oops...",
+			text: "Something went wrong!",
+			icon: "error",
 			showConfirmButton: false,
-			timer: 1500
+			timer: 1500,
 		});
 	}
-}
+};
 
 const loadDelete = async (foodId, name) => {
 	Swal.fire({
 		title: `Do you want to delete ${name}?`,
 		showDenyButton: true,
-		confirmButtonText: 'Yes',
-		confirmButtonColor: '#f8f9fa',
-		denyButtonText: 'No',
-		denyButtonColor: '#007bff'
-	  }).then(async (result) => {
+		confirmButtonText: "Yes",
+		confirmButtonColor: "#f8f9fa",
+		denyButtonText: "No",
+		denyButtonColor: "#007bff",
+	}).then(async (result) => {
 		if (result.isConfirmed) {
 			let url = `foods/${foodId}`;
 			const response = await deleteFetch(url);
 			if (response.statusCode == 200) {
 				renderFoods();
 				Swal.fire({
-					title: 'Success!',
-					text: 'Has been deleted successfully!',
-					icon: 'success',
+					title: "Success!",
+					text: "Has been deleted successfully!",
+					icon: "success",
 					showConfirmButton: false,
-					timer: 1000
+					timer: 1000,
 				});
 			} else {
 				Swal.fire({
-					title: 'Oops...',
-					text: 'Something went wrong!',
-					icon: 'error',
+					title: "Oops...",
+					text: "Something went wrong!",
+					icon: "error",
 					showConfirmButton: false,
-					timer: 1500
+					timer: 1500,
 				});
 			}
 		}
 	});
-}
+};

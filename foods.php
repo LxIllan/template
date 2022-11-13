@@ -1,14 +1,14 @@
 <?php
-    require_once 'template.php';
-    head('Alimentos');
-    body(['Alimentos']);	
+require_once 'template.php';
+head('Alimentos');
+body(['Alimentos']);
 ?>
 
 
 <?php
-	require_once 'php/Controllers/CategoryController.php';
-	$controller = new CategoryController($_SESSION['jwt']);
-	$categories = $controller->getAll();
+require_once 'php/Controllers/FetchController.php';
+$controller = new FetchController($_SESSION['jwt']);
+$categories = $controller->getAll('categories')->categories;
 ?>
 
 <!-- card -->
@@ -23,11 +23,11 @@
 		<div class="table-responsive">
 			<table class="table table-hover table-condensed">
 				<thead>
-				<tr class="bg-light">
-					<th>Nombre</th>
-					<th>Cantidad</th>
-					<th></th>
-				</tr>
+					<tr class="bg-light">
+						<th>Nombre</th>
+						<th>Cantidad</th>
+						<th></th>
+					</tr>
 				</thead>
 				<tbody id="foodsTable">
 				</tbody>
@@ -68,14 +68,14 @@
 									if ($category->id == 1) {
 										continue;
 									}
-									echo "<option value='$category->id'>$category->category</option>";
+									echo "<option value='$category->id'>$category->name</option>";
 								}
 								?>
 							</select>
 						</div>
 						<div class="form-group col-md-4">
-							<label class="control-label" for="addQuantityNotify">Notificar si hay:</label>
-							<input type="number" class="form-control" id="addQuantityNotify" value="5" min="0">
+							<label class="control-label" for="addQtyNotify">Notificar si hay:</label>
+							<input type="number" class="form-control" id="addQtyNotify" value="5" min="0">
 						</div>
 					</div>
 					<div class="form-row">
@@ -84,8 +84,8 @@
 							<input type="number" class="form-control" id="addCost" value="0" min="0">
 						</div>
 						<div class="form-group col-md-4">
-							<label class="control-label" for="addQuantity">Cantidad:</label>
-							<input type="number" class="form-control" id="addQuantity" value="0" min="0" step=".01" required>
+							<label class="control-label" for="addQty">Cantidad:</label>
+							<input type="number" class="form-control" id="addQty" value="0" min="0" step=".01" required>
 						</div>
 						<div class="form-group col-md-4">
 							<!-- <label class="control-label">Precio:</label>
@@ -126,15 +126,15 @@
 							<label class="control-label" for="alterName">Nombre:</label>
 							<input type="text" class="form-control" id="alterName" readonly>
 						</div>
-							<div class="form-group col-md-6">
-								<label class="control-label" for="alterQuantity">Cantidad:</label>
-								<input type="number" class="form-control" id="alterQuantity" readonly>
-							</div>
+						<div class="form-group col-md-6">
+							<label class="control-label" for="alterQty">Cantidad:</label>
+							<input type="number" class="form-control" id="alterQty" readonly>
+						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label class="control-label" for="alterPieces">Piezas:</label>
-							<input type="number" class="form-control" id="alterPieces" value="0", step=".01" required>
+							<input type="number" class="form-control" id="alterPieces" value="0" , step=".01" required>
 						</div>
 						<div class="form-group col-md-8">
 							<label class="control-label" for="alterReason">Justificacion:</label>
@@ -170,18 +170,18 @@
 							<label class="control-label" for="supplyName">Nombre:</label>
 							<input type="text" class="form-control" id="supplyName" readonly>
 						</div>
-							<div class="form-group col-md-6">
-								<label class="control-label" for="supplyQuantity">Cantidad:</label>
-								<input type="number" class="form-control" id="supplyQuantity" readonly>
-							</div>						
-						</div>
-						<div class="form-row">
-							<div class="form-group col-12">
-								<label class="control-label" for="supplyPieces">Piezas:</label>
-								<input type="number" class="form-control" id="supplyPieces" value="0", step=".01" required>
-							</div>
+						<div class="form-group col-md-6">
+							<label class="control-label" for="supplyQty">Cantidad:</label>
+							<input type="number" class="form-control" id="supplyQty" readonly>
 						</div>
 					</div>
+					<div class="form-row">
+						<div class="form-group col-12">
+							<label class="control-label" for="supplyPieces">Piezas:</label>
+							<input type="number" class="form-control" id="supplyPieces" value="0" , step=".01" required>
+						</div>
+					</div>
+				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary" id="btnSupply" name="supply"><span class="fa fa-fw fa-check"></span></button>
 					<button class="btn btn-light" data-dismiss="modal"><span class="fa fa-fw fa-remove"></span></button>
@@ -193,6 +193,6 @@
 </div>
 <!-- /Supply Item Modal -->
 
-<?php 
-	footer(['js/foods/foods.js']);
+<?php
+footer(['js/foods/foods.js']);
 ?>

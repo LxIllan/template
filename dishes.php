@@ -1,16 +1,16 @@
 <?php
-    require_once 'template.php';
-	require_once 'php/Controllers/FoodController.php';
-	$foodId = $_GET['foodId'];
-	$foodController = new FoodController($_SESSION['jwt']);
-	$food = $foodController->get($foodId);
+require_once 'template.php';
+require_once 'php/Controllers/FetchController.php';
+$foodId = $_GET['foodId'];
+$foodController = new FetchController($_SESSION['jwt']);
+$food = $foodController->get('foods', $foodId)->food;
 
-    head('Alimentos');
-    body(['foods.php' => 'Alimentos', $food->name]);
+head('Alimentos');
+body(['foods.php' => 'Alimentos', $food->name]);
 ?>
 
 
-<?php	
+<?php
 ?>
 
 <!-- row -->
@@ -25,12 +25,12 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label class="control-label" for="foodQuantity">Cantidad:</label>
-					<input type="number" class="form-control" id="foodQuantity" value="<?= $food->quantity; ?>" readonly>
+					<input type="number" class="form-control" id="foodQuantity" value="<?= $food->qty; ?>" readonly>
 				</div>
 				<div class="form-group col-md-4">
-					<label class="control-label" for="foodQuantityNotify">Notificar si hay:</label>
-					<input type="number" class="form-control" id="foodQuantityNotify" value="<?= $food->quantity_notif; ?>">
-				</div>				
+					<label class="control-label" for="foodQtyNotify">Notificar si hay:</label>
+					<input type="number" class="form-control" id="foodQtyNotify" value="<?= $food->qty_notify; ?>">
+				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
@@ -38,8 +38,8 @@
 					<input type="number" class="form-control" id="foodCost" value="<?= $food->cost; ?>" value="0" min="0" step="any">
 				</div>
 				<div class="form-group col-md-4">
-					<label class="control-label" for="foodPiecesPerPackage">Piezas por paquete:</label>
-					<input type="number" class="form-control" id="foodPiecesPerPackage" value="<?= $food->pieces_per_package; ?>">
+					<label class="control-label" for="foodPiecesInPackage">Piezas por paquete:</label>
+					<input type="number" class="form-control" id="foodPiecesInPackage" value="<?= $food->pieces_in_package; ?>">
 				</div>
 				<div class="form-group col-md-4">
 					<div class="text-center">
@@ -69,15 +69,15 @@
 		<div class="table-responsive">
 			<table class="table table-hover table-condensed">
 				<thead>
-				<tr class="bg-light">
-					<th>Nombre</th>
-					<th>Porcion</th>
-					<th>Precio</th>
-					<th>Venta individual</th>
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr>
+					<tr class="bg-light">
+						<th>Nombre</th>
+						<th>Porcion</th>
+						<th>Precio</th>
+						<th>Venta individual</th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
 				</thead>
 				<tbody id="dishesTable">
 				</tbody>
@@ -193,6 +193,6 @@
 </div>
 <!--/Edit Item Modal -->
 
-<?php 
-	footer(['js/dishes/dishes.js']);
+<?php
+footer(['js/dishes/dishes.js']);
 ?>
