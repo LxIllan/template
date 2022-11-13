@@ -139,6 +139,12 @@ if (!isset($_SESSION['user'])) {
 								<span class="nav-link-text">Paquetes</span>
 							</a>
 						</li>
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Platillos especiales">
+							<a class="nav-link" href="special_dishes.php">
+								<i class="fa fa-fw fa-cutlery"></i>
+								<span class="nav-link-text">Platillos especiales</span>
+							</a>
+						</li>
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
 							<a class="nav-link" href="users.php">
 								<i class="fa fa-fw fa-users"></i>
