@@ -1,7 +1,7 @@
-<?php    
-	if (!isset($_SESSION['user'])) {
-		header('Location: login.php');
-	}
+<?php
+if (!isset($_SESSION['user'])) {
+	header('Location: login.php');
+}
 ?>
 
 <!-- Navigation-->
@@ -21,7 +21,7 @@
 					<span class="nav-link-text">Venta</span>
 				</a>
 			</li>
-			<!-- /Venta -->           
+			<!-- /Venta -->
 
 			<!-- Consumir Producto -->
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Consumir Producto">
@@ -32,7 +32,7 @@
 			</li>
 			<!-- /Consumir Producto -->
 
-			<!-- Realizar Gasto -->            
+			<!-- Realizar Gasto -->
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Realizar Gasto">
 				<a class="nav-link" data-toggle="modal" data-target="#modalGasto">
 					<i class="fa fa-fw fa-usd"></i>
@@ -41,7 +41,7 @@
 			</li>
 			<!-- /Realizar Gasto -->
 
-			<!-- Notas -->            
+			<!-- Notas -->
 			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Notas">
 				<a class="nav-link" data-toggle="modal" data-target="#modalNotas">
 					<i class="fa fa-fw fa-edit"></i>
@@ -51,31 +51,30 @@
 			<!-- /Notas -->
 
 			<?php
-				if (!$_SESSION['user']['root']) {
-					?>
-					<!-- Historial de gastos -->
-					<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Historial">
-						<a class="nav-link" href="frm_historial_gastos.php">
-							<i class="fa fa-fw fa-list-alt"></i>
-							<span class="nav-link-text">Historial</span>
-						</a>
-					</li>
-					<!-- /Historial de gastos -->
-					<?php
-				}
+			if (!$_SESSION['user']['root']) {
 			?>
-			
+				<!-- Historial de gastos -->
+				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Historial">
+					<a class="nav-link" href="frm_historial_gastos.php">
+						<i class="fa fa-fw fa-list-alt"></i>
+						<span class="nav-link-text">Historial</span>
+					</a>
+				</li>
+				<!-- /Historial de gastos -->
+			<?php
+			}
+			?>
+
 			<?php
 			if ($_SESSION['user']['root']) {
-				?>
+			?>
 				<!-- Productos -->
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Inventario">
-					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseProductos" data-parent="#exampleAccordion">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseProductos" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-cubes"></i>
 						<span class="nav-link-text">Inventario</span>
 					</a>
-					<ul class="sidenav-second-level collapse" id="collapseProductos">                        
+					<ul class="sidenav-second-level collapse" id="collapseProductos">
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos">
 							<a class="nav-link" href="foods.php">
 								<i class="fa fa-user fa-cutlery"></i>
@@ -95,8 +94,7 @@
 
 				<!-- Historiales -->
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Historiales">
-					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseHistoriales" data-parent="#exampleAccordion">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseHistoriales" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-list-alt"></i>
 						<span class="nav-link-text">Historiales</span>
 					</a>
@@ -113,16 +111,16 @@
 								Alimentos surtidos
 							</a>
 						</li>
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Productos">
+							<a class="nav-link" href="history_products.php">
+								<i class="fa fa-user fa-list-alt"></i>
+								Productos
+							</a>
+						</li>
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos vendidos">
 							<a class="nav-link" href="frm_historial_alimentos_vendidos.php">
 								<i class="fa fa-user fa-list-alt"></i>
 								Alimentos vendidos
-							</a>
-						</li>
-						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Productos consumidos">
-							<a class="nav-link" href="frm_historial_productos.php">
-								<i class="fa fa-user fa-list-alt"></i>
-								Productos consumidos
 							</a>
 						</li>
 					</ul>
@@ -131,12 +129,11 @@
 
 				<!-- Configuracion -->
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configuración">
-					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseConfiguracion" data-parent="#exampleAccordion">
+					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseConfiguracion" data-parent="#exampleAccordion">
 						<i class="fa fa-fw fa-gear"></i>
 						<span class="nav-link-text">Configuración</span>
 					</a>
-					<ul class="sidenav-second-level collapse" id="collapseConfiguracion">                        
+					<ul class="sidenav-second-level collapse" id="collapseConfiguracion">
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Paquetes">
 							<a class="nav-link" href="frm_paquetes.php">
 								<i class="fa fa-fw fa-cubes"></i>
@@ -177,18 +174,18 @@
 			</li>
 		</ul>
 
-		<ul class="navbar-nav ml-auto">            
+		<ul class="navbar-nav ml-auto">
 			<!-- User -->
 			<li class="dropdown nav-item">
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 					<i class="fa fa-user"></i>
 					<?php
-						echo "{$_SESSION['user']['name']} {$_SESSION['user']['last_name']}";
-						if ($_SESSION['user']['root']) {
-							echo ' #';
-						} else {
-							echo '  ';
-						}
+					echo "{$_SESSION['user']['name']} {$_SESSION['user']['last_name']}";
+					if ($_SESSION['user']['root']) {
+						echo ' #';
+					} else {
+						echo '  ';
+					}
 					?>
 				</a>
 
@@ -215,9 +212,7 @@
 
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-	 aria-labelledby="logoutModalLabel"
-	 aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -227,7 +222,7 @@
 				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
-			</div>            
+			</div>
 			<div class="modal-footer">
 				<a class="btn btn-primary" id="btnLogout" href="php/logout.php">Aceptar</a>
 			</div>
