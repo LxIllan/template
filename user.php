@@ -1,14 +1,14 @@
 <?php
-    require_once 'template.php';
-	
-	require_once 'php/Controllers/UserController.php';
+require_once 'template.php';
 
-	$userId = (isset($_GET['id'])) ? $_GET['id'] : $_SESSION['user']['id'];
-	$userController = new UserController($_SESSION['jwt']);
-	$user = $userController->get($userId);
+require_once 'php/Controllers/UserController.php';
 
-    head('Usuario');
-	body(['users.php' => 'Usuarios', "$user->name $user->last_name"]);
+$userId = (isset($_GET['id'])) ? $_GET['id'] : $_SESSION['user']['id'];
+$userController = new UserController($_SESSION['jwt']);
+$user = $userController->get($userId);
+
+head('Usuario');
+body(['users.php' => 'Usuarios', "$user->name $user->last_name"]);
 ?>
 
 <!-- row -->
@@ -16,20 +16,18 @@
 	<div class="col-12">
 		<form id="editUserForm">
 			<div class="text-center">
-				<img class="rounded-circle" height="200" width="200" src="<?= $user->photo_path; ?>"/>
+				<img class="rounded-circle" height="200" width="200" src="<?= $user->photo; ?>" />
 			</div>
 			<br>
 			<input type="hidden" id="userId" value="<?= $user->id; ?>">
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label class="control-label" for="name">Nombre:</label>
-					<input type="text" class="form-control" id="name"
-						value="<?= $user->name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
+					<input type="text" class="form-control" id="name" value="<?= $user->name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
 				</div>
 				<div class="form-group col-md-4">
 					<label class="control-label" for="lastName">Apellido:</label>
-					<input type="text" class="form-control" id="lastName"
-						value="<?= $user->last_name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
+					<input type="text" class="form-control" id="lastName" value="<?= $user->last_name; ?>" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
 				</div>
 				<div class="form-group col-md-4">
 					<label class="control-label" for="email">Correo electrónico:</label>
@@ -43,7 +41,7 @@
 				</div>
 				<div class="form-group col-md-4">
 					<label class="control-label" for="phone">Teléfono:</label>
-					<input type="text" class="form-control" id="phone" value="<?= $user->phone_number; ?>">
+					<input type="text" class="form-control" id="phone" value="<?= $user->phone; ?>">
 				</div>
 				<div class="form-group col-md-4">
 					<div class="text-center">
@@ -75,6 +73,6 @@
 <!-- /.row -->
 
 
-<?php 
-	footer(['js/users/user.js']);
+<?php
+footer(['js/users/user.js']);
 ?>
