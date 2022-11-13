@@ -91,7 +91,6 @@ if (!isset($_SESSION['user'])) {
 				</li>
 				<!-- /Productos -->
 
-
 				<!-- Historiales -->
 				<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Historiales">
 					<a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseHistoriales" data-parent="#exampleAccordion">
@@ -135,7 +134,7 @@ if (!isset($_SESSION['user'])) {
 					</a>
 					<ul class="sidenav-second-level collapse" id="collapseConfiguracion">
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Paquetes">
-							<a class="nav-link" href="frm_paquetes.php">
+							<a class="nav-link" href="combos.php">
 								<i class="fa fa-fw fa-cubes"></i>
 								<span class="nav-link-text">Paquetes</span>
 							</a>
