@@ -99,9 +99,15 @@ if (!isset($_SESSION['user'])) {
 					</a>
 					<ul class="sidenav-second-level collapse" id="collapseHistoriales">
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Del día">
-							<a class="nav-link" href="frm_historial_del_dia.php">
+							<a class="nav-link" href="summary.php">
 								<i class="fa fa-user fa-list-alt"></i>
 								Del día
+							</a>
+						</li>
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Gastos">
+							<a class="nav-link" href="expenses.php">
+								<i class="fa fa-user fa-list-alt"></i>
+								Gastos
 							</a>
 						</li>
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos surtidos">
