@@ -78,16 +78,6 @@ function body(array $breadcrumbs = []): void
 							<li class="breadcrumb-item active">{$breadcrumbs[array_key_last($breadcrumbs)]}</li>
 						</ol>
 						<!-- /.Breadcrumbs-->
-
-						<!-- Page Header -->
-						<div class="row">
-							<div class="col-12">
-								<h1 class="modal-header">
-								{$breadcrumbs[array_key_last($breadcrumbs)]}
-								</h1>
-							</div>
-						</div>
-						<!-- /.Page Header -->
 	HTML;
 }
 
@@ -137,10 +127,11 @@ function footer(array $sources = []): void
 					<!-- Custom scripts for all pages-->
 					<script src="js/sb-admin.min.js"></script>
 					<!-- Custom scripts for this page-->
-					<script src="js/sb-admin-datatables.min.js"></script>
-					<script src="js/sb-admin-charts.min.js"></script>
+					<!-- <script src="js/sb-admin-datatables.min.js"></script> -->
+					<!-- <script src="js/sb-admin-charts.min.js"></script> -->
 					<script src="js/sweetalert2@11.js"></script>
 					<script src="js/helpers/fetch.js"></script>
+					<script src="js/helpers/helper.js"></script>
 					<script src="js/auth/logout.js"></script>
 					$source
 				</div>

@@ -9,9 +9,14 @@ head('Alimentos');
 body(['foods.php' => 'Alimentos', $food->name]);
 ?>
 
-
-<?php
-?>
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1><?= $food->name ?></h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
 
 <!-- row -->
 <div class="row">

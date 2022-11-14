@@ -1,8 +1,17 @@
 <?php
-    require_once 'template.php';
-    head('Usuarios');
-    body(['Usuarios']);
+require_once 'template.php';
+head('Usuarios');
+body(['Usuarios']);
 ?>
+
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1>Usuarios</h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
 
 <!-- card -->
 <div>
@@ -16,13 +25,13 @@
 		<div class="table-responsive">
 			<table class="table table-hover table-condensed">
 				<thead>
-				<tr class="bg-light">
-					<th>Foto</th>
-					<th>Nombre</th>
-					<th>Rol</th>
-					<th></th>
-					<th></th>
-				</tr>
+					<tr class="bg-light">
+						<th>Foto</th>
+						<th>Nombre</th>
+						<th>Rol</th>
+						<th></th>
+						<th></th>
+					</tr>
 				</thead>
 				<tbody id="usersTable">
 				</tbody>
@@ -35,7 +44,7 @@
 
 <!--Add Item Modal -->
 <div id="addModal" class="modal fade" role="dialog">
-	<div class="modal-dialog modal-lg">            
+	<div class="modal-dialog modal-lg">
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
@@ -46,7 +55,7 @@
 				<form class="form-horizontal" id="addForm">
 					<label class="control-label">Foto:</label>
 					<div class="text-center">
-						<img class="rounded-circle" id="image" height="200" width="200" src="" hidden/>
+						<img class="rounded-circle" id="image" height="200" width="200" src="" hidden />
 						<output id="list"></output>
 						<br>
 						<input class="btn-light" accept=".jpg" type="file" id="uploadImage">
@@ -55,13 +64,11 @@
 					<div class="form-row">
 						<div class="col-md-4 mb-3">
 							<label class="control-label" for="addName">Nombre</label>
-							<input type="text" class="form-control" id="addName"
-								placeholder="Nombre" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
+							<input type="text" class="form-control" id="addName" placeholder="Nombre" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label class="control-label" for="addLastName">Apellido</label>
-							<input type="text" class="form-control" id="addLastName"
-								placeholder="Apellido" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
+							<input type="text" class="form-control" id="addLastName" placeholder="Apellido" required pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]*">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label class="control-label" for="addEmail">Email</label>
@@ -95,8 +102,8 @@
 </div>
 <!--Add Item Modal -->
 
-<?php 
-	footer([
-		'js/users/users.js'
-	]);
+<?php
+footer([
+	'js/users/users.js'
+]);
 ?>

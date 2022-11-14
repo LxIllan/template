@@ -18,8 +18,21 @@ $controller = new FetchController($_SESSION['jwt']);
 $categories = $controller->getAll('categories?dishes=true&all=true')->categories;
 ?>
 
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1><?= $combo->name ?></h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
+
+<!-- Combo description -->
 <p id="comboId" hidden><?= $combo->id ?></p>
 <?= $combo->description ?>
+<hr>
+<!-- /Combo description -->
+
 
 <!-- card -->
 <div>

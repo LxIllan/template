@@ -11,6 +11,15 @@ head('Usuario');
 body(['users.php' => 'Usuarios', "$user->name $user->last_name"]);
 ?>
 
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1><?= "$user->name $user->last_name" ?></h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
+
 <!-- row -->
 <div class="row">
 	<div class="col-12">

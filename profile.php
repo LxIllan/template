@@ -13,6 +13,15 @@ $userController = new UserController($_SESSION['jwt']);
 $user = $userController->get($userId);
 ?>
 
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1>Perfil</h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
+
 <!-- row -->
 <div class="row">
 	<div class="col-12">

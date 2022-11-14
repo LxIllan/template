@@ -1,9 +1,19 @@
 <?php
+
 require_once 'template.php';
 head('Productos');
 body(['Productos']);
+
 ?>
 
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1>Productos</h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
 
 <!-- card -->
 <div>

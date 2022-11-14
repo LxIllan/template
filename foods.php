@@ -11,6 +11,15 @@ $controller = new FetchController($_SESSION['jwt']);
 $categories = $controller->getAll('categories')->categories;
 ?>
 
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1><?= "Alimentos" ?></h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
+
 <!-- card -->
 <div>
 	<div>

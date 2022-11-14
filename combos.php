@@ -6,6 +6,15 @@ head('Paquetes');
 body(['Paquetes']);
 ?>
 
+<!-- Page Header -->
+<div class="row">
+	<div class="col-12">
+		<h1><?= 'Paquetes' ?></h1>
+		<hr>
+	</div>
+</div>
+<!-- /.Page Header -->
+
 <!-- card -->
 <div>
 	<div>
