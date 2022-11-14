@@ -1,5 +1,5 @@
-// const host = 'https://slim.syss.tech/';
-const host = "http://localhost:8080/";
+const host = "https://slim.syss.tech/";
+// const host = "http://localhost:8080/";
 
 const get = async (url) => {
 	const token = localStorage.getItem("jwt");

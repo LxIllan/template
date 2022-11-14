@@ -2,8 +2,8 @@
 
 class Util
 {
-	// public const API_URL = 'https://slim.syss.tech/';
-	public const API_URL = 'http://localhost:8080/';
+	public const API_URL = 'https://slim.syss.tech/';
+	// public const API_URL = 'http://localhost:8080/';
 	public const FOOTER = 'Copyright © Template 2022';
 	public const APP_NAME = 'Template';
 	public const COMBO_ID = 1;
