@@ -10,7 +10,7 @@ const renderUsers = async () => {
 		let adminOrCashier = user.root == 1 ? "Admin" : "Cajero";
 
 		tbody += `<tr>
-						<td><img class="rounded-circle" height="120" width="120" src="${user.photo_path}"/></td>
+						<td><img class="rounded-circle" height="120" width="120" src="${user.photo}"/></td>
 						<td>${user.name} ${user.last_name}</td>
 						<td>${adminOrCashier}</td>
 						<td><a class="btn btn-light btn-sm"
