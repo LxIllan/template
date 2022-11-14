@@ -141,11 +141,11 @@ $categories = $controller->getAll('categories')->categories;
 						</div>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-md-4">
+						<div class="form-group col-md-3">
 							<label class="control-label" for="alterPieces">Piezas:</label>
 							<input type="number" class="form-control" id="alterPieces" value="0" , step=".01" required>
 						</div>
-						<div class="form-group col-md-8">
+						<div class="form-group col-md-9">
 							<label class="control-label" for="alterReason">Justificacion:</label>
 							<input type="text" id="alterReason" class="form-control" required>
 						</div>
