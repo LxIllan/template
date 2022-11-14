@@ -9,7 +9,7 @@ body(['Gastos']);
 	<div class="col-12">
 		<h1 class="modal-header">Gastos</h1>
 		<hr>
-		<h3 id="total">Total: $0.00</h3>
+		<h3 id="total">Loading...</h3>
 		<hr>
 	</div>
 </div>
