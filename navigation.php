@@ -41,15 +41,6 @@ if (!isset($_SESSION['user'])) {
 			</li>
 			<!-- /Realizar Gasto -->
 
-			<!-- Notas -->
-			<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Notas">
-				<a class="nav-link" data-toggle="modal" data-target="#modalNotas">
-					<i class="fa fa-fw fa-edit"></i>
-					<span class="nav-link-text">Notas</span>
-				</a>
-			</li>
-			<!-- /Notas -->
-
 			<?php
 			if (!$_SESSION['user']['root']) {
 			?>
@@ -110,22 +101,16 @@ if (!isset($_SESSION['user'])) {
 								Gastos
 							</a>
 						</li>
-						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos surtidos">
+						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos">
 							<a class="nav-link" href="history_foods.php">
 								<i class="fa fa-user fa-list-alt"></i>
-								Alimentos surtidos
+								Alimentos
 							</a>
 						</li>
 						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Productos">
 							<a class="nav-link" href="history_products.php">
 								<i class="fa fa-user fa-list-alt"></i>
 								Productos
-							</a>
-						</li>
-						<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alimentos vendidos">
-							<a class="nav-link" href="frm_historial_alimentos_vendidos.php">
-								<i class="fa fa-user fa-list-alt"></i>
-								Alimentos vendidos
 							</a>
 						</li>
 					</ul>
